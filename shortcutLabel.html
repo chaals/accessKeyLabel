@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>accessKeyLabel HTML extension proposal</title>
+    <style class="remove">
+      #abstract::before {content: "Abstract"; font-size: 1.5em;}
+      #sotd::before {content: "Status"; font-size: 1.5em;}
+      #sotd, #abstract {border: 1px solid }
+    </style>
+    <script src="https://www.w3.org/Tools/respec/respec-w3c-common" async="" class="remove"></script>
+    <script class="remove">
+      var respecConfig = {
+          // specification status (e.g. WD, LCWD, WG-NOTE, etc.). If in doubt use ED.
+               specStatus:           "unofficial",
+          
+          // the specification's short name, as in http://www.w3.org/TR/short-name/
+        //          shortName:            "xxx-xxx",
+
+          // if your specification has a subtitle that goes below the main
+          // formal title, define it here
+          // subtitle   :  "an excellent document",
+
+          // if you wish the publication date to be other than the last modification, set this
+          // publishDate:  "2009-08-06",
+
+          // if the specification's copyright date is a range of years, specify
+          // the start date here:
+          // copyrightStart: "2005"
+
+          // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
+          // and its maturity status
+          // previousPublishDate:  "1977-03-15",
+          // previousMaturity:  "WD",
+
+          // if there a publicly available Editor's Draft, this is the link
+          // edDraftURI:           "http://berjon.com/",
+
+          // if this is a LCWD, uncomment and set the end of its review period
+          // lcEnd: "2009-08-05",
+
+          // editors, add as many as you like
+          // only "name" is required
+          editors:  [
+              {
+                  name:       "chaals"
+                //              ,   url:        "http://yandex.com/"
+              ,   mailto:     "chaals@yandex-team.ru"
+              ,   company:    "Yandex"
+              ,   companyURL: "http://yandex.com/"
+              },
+          ],
+          
+          // name of the WG
+            //          wg:           "In Charge Of This Document Working Group",
+          
+          // URI of the public WG page
+          wgURI:        "http://discourse.wicg.io",
+          
+          // name (without the @w3c.org) of the public mailing to which comments are due
+          wgPublicList: "spec-writers-anonymous",
+          
+          // URI of the patent status for this WG, for Rec-track documents
+          // !!!! IMPORTANT !!!!
+          // This is important for Rec-track documents, do not copy a patent URI from a random
+          // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
+          // Team Contact.
+          wgPatentURI:  "",
+          // !!!! IMPORTANT !!!! MAKE THE ABOVE BLINK IN YOUR HEAD
+      };
+    </script>
+  </head>
+  <body>
+    <section id="abstract">
+      <p> This is a proposal to extend HTML with an <code>accessKeyLabel</code> DOM attribute. In contrast to the HTML5 version, this
+        proposal includes a microsyntax based on DOM UI Events that ensures the value returned is parseable</p>
+    </section>
+    <section id="sotd">
+      <p>This is an unofficial draft. There is one implementation of accessKeyLabel, in Firefox, which followed HTML5 in allowing different
+        syntax for different platforms. It was therefore <a target="_blank" title="https://github.com/w3c/html/pull/144" href="https://github.com/w3c/html/pull/144">removed
+          from HTML 5.1</a>. This proposal is open for discussion in the Web Platform Incubator.</p>
+    </section>
+    <section>
+      <h2>Why <code>accessKeyLabel</code>?</h2>
+      <p> User Agents actually assign accesskeys and other shortcuts - or block them. So user agents should inform the user of assigned
+        activation triggers or focusing shortcuts. However, they generally do this badly, and authors are used to doing so - in part because
+        successive specifications for <code>accesskey</code> have asked them to do so in an apparently thoughtless violation of the
+        "priority of constituencies" design principle.</p>
+      <p>The <code>accessKeyLabel</code> DOM attribute allows authors to do so in ways that are natural to the flow of their application.</p>
+      <div class="example">
+        <p>To tell the user what the shortcut key is, the author has this script here opted to explicitly add the key combination to the
+          button's label:</p>
+        <pre highlight="javascript">function addShortcutKeyLabel(button) {
+  if (button.accessKeyLabel != '')
+    button.value += ' (' + button.accessKeyLabel + ')';
+}
+ 
+addShortcutKeyLabel(document.getElementById('c'));
+     </pre>
+      </div>
+    </section>
+    <section>
+      <h2>Implementation</h2>
+      @@specify the microsyntax… [note that <code>aria-kbdshortcuts</code> has an attempt at this. These need to be aligned]<br>
+      @@insert the assignment in the HTML <code>accesskey</code> processing algorithm.<br>
+      @@add the attribute to <code>HTMLElement</code>.<br>
+      <br>
+    </section>
+    The <dfn attribute="" for="HTMLElement"><code>accessKeyLabel</code></dfn> IDL attribute must return a string that represents the
+    element's <a href="@@">assigned access key</a>, if any. If the element does not have one, then the IDL attribute must return the empty
+    string.
+    <section class="privsec">
+      <h2>Security and Privacy considerations</h2>
+      <p class="issue">@@Needs review</p>
+      <p><code>accessKeyLabel</code> can be used as information for fingerprinting a user, in particular if the user sets up their browser
+        to specify shortcut activations that are adapted to their personal needs or preferences.</p>
+    </section>
+    <section class="appendix">
+      <h2>Acknowledgements</h2>
+      <p> Many thanks to Robin Berjon for making our lives so much easier with his cool tool, Ian Hickson for showing that implementation is
+        critically important, Mozilla for doing an implemenation of the HTML5 version of <code>accessKeyLabel</code>,&nbsp; many people for
+        contributing to the discussion on how discoverability is critical.</p>
+    </section>
+  </body>
+</html>
