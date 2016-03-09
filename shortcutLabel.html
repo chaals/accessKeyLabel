@@ -13,6 +13,7 @@
       var respecConfig = {
           // specification status (e.g. WD, LCWD, WG-NOTE, etc.). If in doubt use ED.
                specStatus:           "unofficial",
+        edDraftURI: "https://chaals.github.io/accessKeyLabel/shortcutLabel.html",
           
           // the specification's short name, as in http://www.w3.org/TR/short-name/
         //          shortName:            "xxx-xxx",
@@ -52,13 +53,13 @@
           ],
           
           // name of the WG
-            //          wg:           "In Charge Of This Document Working Group",
+                     wg:           "Web Incubator Platform Community Group",
           
           // URI of the public WG page
           wgURI:        "http://discourse.wicg.io",
           
           // name (without the @w3c.org) of the public mailing to which comments are due
-          wgPublicList: "spec-writers-anonymous",
+            //wgPublicList: "spec-writers-anonymous",
           
           // URI of the patent status for this WG, for Rec-track documents
           // !!!! IMPORTANT !!!!
@@ -78,7 +79,8 @@
     <section id="sotd">
       <p>This is an unofficial draft. There is one implementation of accessKeyLabel, in Firefox, which followed HTML5 in allowing different
         syntax for different platforms. It was therefore <a target="_blank" title="https://github.com/w3c/html/pull/144" href="https://github.com/w3c/html/pull/144">removed
-          from HTML 5.1</a>. This proposal is open for discussion in the Web Platform Incubator.</p>
+          from HTML 5.1</a>. This proposal is open for discussion in the Web Platform Incubator, or issue, comments and pull requests are
+        welcome in <a href="https://github.com/chaals/accessKeyLabel/">this draft's github repository</a>. </p>
     </section>
     <section>
       <h2>Why <code>accessKeyLabel</code>?</h2>
@@ -86,29 +88,29 @@
         activation triggers or focusing shortcuts. However, they generally do this badly, and authors are used to doing so - in part because
         successive specifications for <code>accesskey</code> have asked them to do so in an apparently thoughtless violation of the
         "priority of constituencies" design principle.</p>
-      <p>The <code>accessKeyLabel</code> DOM attribute allows authors to do so in ways that are natural to the flow of their application.</p>
+      <p>The <code>accessKeyLabel</code> DOM attribute's advantage is that it allows authors to do so in ways that are natural to the flow
+        of their application.</p>
       <div class="example">
-        <p>To tell the user what the shortcut key is, the author has this script here opted to explicitly add the key combination to the
-          button's label:</p>
+        <p>This script explicitly adds the activation shortcut to a button's label:</p>
         <pre highlight="javascript">function addShortcutKeyLabel(button) {
   if (button.accessKeyLabel != '')
     button.value += ' (' + button.accessKeyLabel + ')';
 }
  
 addShortcutKeyLabel(document.getElementById('c'));
-     </pre>
-      </div>
+</pre> </div>
     </section>
     <section>
       <h2>Implementation</h2>
-      @@specify the microsyntax… [note that <code>aria-kbdshortcuts</code> has an attempt at this. These need to be aligned]<br>
-      @@insert the assignment in the HTML <code>accesskey</code> processing algorithm.<br>
-      @@add the attribute to <code>HTMLElement</code>.<br>
-      <br>
+      <p class="issue"> @@specify the microsyntax… [note that <code>aria-kbdshortcuts</code> has an attempt at this. These need to be
+        aligned]</p>
+      <p class="issue"> @@insert the assignment in the <a href="https://w3c.github.io/html/editing.html#assigning-keyboard-shortcuts-processing-model">HTML
+          <code>accesskey</code> processing algorithm</a>.</p>
+      <p class="issue"> @@add the attribute to <code>HTMLElement</code>.</p>
     </section>
     The <dfn attribute="" for="HTMLElement"><code>accessKeyLabel</code></dfn> IDL attribute must return a string that represents the
-    element's <a href="@@">assigned access key</a>, if any. If the element does not have one, then the IDL attribute must return the empty
-    string.
+    element's <a href="https://w3c.github.io/html/editing.html#assigned-access-key">assigned access key</a>, if any. If the element does
+    not have one, then the IDL attribute must return the empty string.
     <section class="privsec">
       <h2>Security and Privacy considerations</h2>
       <p class="issue">@@Needs review</p>
@@ -117,9 +119,10 @@ addShortcutKeyLabel(document.getElementById('c'));
     </section>
     <section class="appendix">
       <h2>Acknowledgements</h2>
-      <p> Many thanks to Robin Berjon for making our lives so much easier with his cool tool, Ian Hickson for showing that implementation is
-        critically important, Mozilla for doing an implemenation of the HTML5 version of <code>accessKeyLabel</code>,&nbsp; many people for
-        contributing to the discussion on how discoverability is critical.</p>
+      <p> Many thanks to Robin Berjon for making our lives so much easier with his cool tool, The HTML Working Group behind HTML 4, Simon
+        Pieters and later James Craig for realising that accesskey is a useful feature for many people, Ian Hickson for showing that
+        implementation is critically important, Mozilla for doing an implementation of the HTML5 version of <code>accessKeyLabel</code>,&nbsp;
+        many people for contributing to the discussion on how discoverability is critical.</p>
     </section>
   </body>
 </html>
